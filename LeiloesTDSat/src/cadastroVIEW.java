@@ -120,28 +120,28 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // Obter os valores dos campos
+       
         String nome = cadastroNome.getText();
         String valorText = cadastroValor.getText();
         
-        // Verificar se os campos estão preenchidos
+        
         if (nome.isEmpty() || valorText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return; // Interrompe o método se algum campo estiver vazio
+            return; 
         }
 
-        // Verificar se o valor é um número válido
+      
         int valor;
         try {
             valor = Integer.parseInt(valorText);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "O valor deve ser um número válido!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return; // Interrompe o método se o valor não for um número
+            return; 
         }
 
-        // Se passou pelas validações, criar o objeto produto e fazer o cadastro
+        
         ProdutosDTO produto = new ProdutosDTO();
-        String status = "A Venda";  // Esse valor é definido como "A Venda" por padrão
+        String status = "A Venda";  
 
         produto.setNome(nome);
         produto.setValor(valor);
@@ -171,7 +171,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify                     
+                    
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnProdutos;
     private javax.swing.JTextField cadastroNome;
@@ -182,5 +182,5 @@ public class cadastroVIEW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    // End of variables declaration                   
+                    
 }

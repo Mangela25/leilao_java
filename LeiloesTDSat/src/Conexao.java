@@ -13,10 +13,10 @@ import java.sql.SQLException;
 
 public class Conexao {
 
-    // Método que retorna a conexão com o banco de dados
+    // conexão com o banco de dados
     public static Connection getConnection() throws SQLException {
         try {
-            // Registrar o driver JDBC
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             // Conectar com o banco de dados

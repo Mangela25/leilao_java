@@ -44,7 +44,7 @@ public class ProdutosDAO {
         }
     }
 
-    // Método para listar todos os produtos do banco de dados
+  
     public ArrayList<ProdutosDTO> listarProdutos() {
     ArrayList<ProdutosDTO> produtosList = new ArrayList<>();
     Connection con = null;

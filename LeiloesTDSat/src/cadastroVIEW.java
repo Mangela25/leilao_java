@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/**
- *
- * @author gel_m
- */
+
 import javax.swing.JOptionPane;
 
 public class cadastroVIEW extends javax.swing.JFrame {
@@ -29,15 +26,15 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 24)); 
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 24));
         jLabel1.setText("Sistema de Leilões");
 
         jLabel3.setText("Cadastre um novo produto");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14));
         jLabel4.setText("Nome:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14));
         jLabel5.setText("Valor:");
 
         btnCadastrar.setBackground(new java.awt.Color(153, 255, 255));
@@ -55,6 +52,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
             }
         });
 
+        // Layout ajustado para evitar problemas de sintaxe
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,8 +85,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
                                 .addComponent(cadastroValor, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(37, 37, 37)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-        );
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -115,53 +113,54 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-
         pack();
     }
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-       
+        // Recupera o nome e valor do produto
         String nome = cadastroNome.getText();
         String valorText = cadastroValor.getText();
-        
-        
+
+        // Verifica se os campos não estão vazios
         if (nome.isEmpty() || valorText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return; 
+            return;
         }
 
-      
+        // Tenta converter o valor para um número
         int valor;
         try {
             valor = Integer.parseInt(valorText);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "O valor deve ser um número válido!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return; 
+            return;
         }
 
-        
+        // Cria um novo produto e configura seus atributos
         ProdutosDTO produto = new ProdutosDTO();
-        String status = "A Venda";  
+        String status = "A Venda";
 
         produto.setNome(nome);
         produto.setValor(valor);
         produto.setStatus(status);
 
+        // Tenta cadastrar o produto no banco de dados
         ProdutosDAO produtodao = new ProdutosDAO();
         boolean sucesso = produtodao.cadastrarProduto(produto);
 
-        // Mostrar a mensagem dependendo do sucesso do cadastro
+        // Exibe uma mensagem dependendo do sucesso do cadastro
         if (sucesso) {
             JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar produto. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }                                            
+    }
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        listagemVIEW listagem = new listagemVIEW(); 
+        // Abre a tela de listagem de produtos
+        listagemVIEW listagem = new listagemVIEW();
         listagem.setVisible(true);
-    }                                           
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -182,5 +181,4 @@ public class cadastroVIEW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-                    
 }

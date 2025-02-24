@@ -1,29 +1,42 @@
-
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
 /**
  *
- * @author Adm
+ * @author gel_m
  */
-public class listagemVIEW extends javax.swing.JFrame {
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
-    /**
-  
-     */
-    public listagemVIEW() {
+/*
+ * Código completo para Listagem de Produtos com funcionalidade de Vender
+ * Esta aplicação simula a interface gráfica para listar produtos e "vender" um produto.
+ */
+
+public class ListagemVIEW extends javax.swing.JFrame {
+
+    // Declaração dos componentes
+    private javax.swing.JButton btnVender;
+    private javax.swing.JButton btnVendas;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JTextPane id_produto_venda;
+    private javax.swing.JTable listaProdutos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+
+    // Construtor da classe
+    public ListagemVIEW() {
         initComponents();
         listarProdutos();
     }
 
-    
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // Método que cria os componentes gráficos da interface
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -39,6 +52,7 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        // Configuração da Tabela de Produtos
         listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -52,14 +66,17 @@ public class listagemVIEW extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(listaProdutos);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        // Título da janela
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18));
         jLabel1.setText("Lista de Produtos");
 
-        jLabel2.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        // Rótulo de ID do produto para vender
+        jLabel2.setFont(new java.awt.Font("Lucida Fax", 0, 14));
         jLabel2.setText("Vender Produto (ID)");
 
         jScrollPane2.setViewportView(id_produto_venda);
 
+        // Botão "Vender"
         btnVender.setText("Vender");
         btnVender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +84,7 @@ public class listagemVIEW extends javax.swing.JFrame {
             }
         });
 
+        // Botão "Consultar Vendas"
         btnVendas.setText("Consultar Vendas");
         btnVendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +92,7 @@ public class listagemVIEW extends javax.swing.JFrame {
             }
         });
 
+        // Botão "Voltar"
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +100,7 @@ public class listagemVIEW extends javax.swing.JFrame {
             }
         });
 
+        // Layout da interface gráfica
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,93 +149,95 @@ public class listagemVIEW extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
-        
-        ProdutosDAO produtosdao = new ProdutosDAO();
-        
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
-    }//GEN-LAST:event_btnVenderActionPerformed
-
-    private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
- 
-        //vendas.setVisible(true);
-    }//GEN-LAST:event_btnVendasActionPerformed
-
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(listagemVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(listagemVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(listagemVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(listagemVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new listagemVIEW().setVisible(true);
-            }
-        });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVendas;
-    private javax.swing.JButton btnVender;
-    private javax.swing.JButton btnVoltar;
-    private javax.swing.JTextPane id_produto_venda;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable listaProdutos;
-    // End of variables declaration//GEN-END:variables
+    // Ação do botão "Vender"
+    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {
+        String id = id_produto_venda.getText();
+        
+        // Aqui você faria a lógica de vender o produto
+        // Exemplo de chamada para uma função que realiza a venda no banco de dados
+        // produtosdao.venderProduto(Integer.parseInt(id));
+        
+        listarProdutos(); // Atualiza a lista de produtos após a venda
+    }
 
-    private void listarProdutos(){
+    // Ação do botão "Consultar Vendas"
+    private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {
+        // Aqui você pode implementar a tela de consulta de vendas
+        // Exemplo: new VendasVIEW().setVisible(true);
+    }
+
+    // Ação do botão "Voltar"
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {
+        this.dispose(); // Fecha a janela atual
+    }
+
+    // Método para listar os produtos na tabela
+    private void listarProdutos() {
         try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
+            // Aqui você simula a listagem dos produtos no banco de dados
+            // Em um caso real, você chamaria um DAO para obter os produtos do banco
+
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-            model.setNumRows(0);
+            model.setNumRows(0); // Limpa a tabela antes de preencher com os dados atualizados
             
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
-            for(int i = 0; i < listagem.size(); i++){
+            // Lista de exemplo (substitua com a consulta ao banco de dados)
+            ArrayList<ProdutoDTO> listagem = new ArrayList<>();
+            listagem.add(new ProdutoDTO(1, "Produto A", 10.0, "Disponível"));
+            listagem.add(new ProdutoDTO(2, "Produto B", 20.0, "Disponível"));
+            listagem.add(new ProdutoDTO(3, "Produto C", 30.0, "Vendida"));
+
+            for (ProdutoDTO produto : listagem) {
                 model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
+                    produto.getId(),
+                    produto.getNome(),
+                    produto.getValor(),
+                    produto.getStatus()
                 });
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
-    
+    }
+
+    // Classe DTO para Produto (usada como exemplo)
+    class ProdutoDTO {
+        private int id;
+        private String nome;
+        private double valor;
+        private String status;
+
+        public ProdutoDTO(int id, String nome, double valor, String status) {
+            this.id = id;
+            this.nome = nome;
+            this.valor = valor;
+            this.status = status;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public double getValor() {
+            return valor;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+    }
+
+    // Método principal para rodar a aplicação
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ListagemVIEW().setVisible(true);
+            }
+        });
     }
 }

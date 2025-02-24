@@ -8,38 +8,49 @@
  * @author Adm
  */
 public class ProdutosDTO {
-    private Integer id;
+    
+    private int id;
     private String nome;
-    private Integer valor;
+    private double valor;
     private String status;
 
-    // Getters e Setters
-    public Integer getId() {
+    public ProdutosDTO(int id, String nome, double valor, String status) {
+        this.id = id;
+        this.nome = nome;
+        this.valor = valor;
+        this.status = status;
+    }
+
+    ProdutosDTO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public Integer getValor() {
-        return valor;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setValor(Integer valor) {
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {

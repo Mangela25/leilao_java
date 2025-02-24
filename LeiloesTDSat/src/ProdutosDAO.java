@@ -7,76 +7,57 @@
  *
  * @author Adm
  */
-
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Statement;
 
 public class ProdutosDAO {
+    
+    private Connection conn;
+    
+    public ProdutosDAO() {
+        try {
+            // Ajuste aqui: adicione useSSL=false para desabilitar SSL na conexão
+            String url = "jdbc:mysql://localhost:3306/nome_do_banco?useSSL=false";
+            String usuario = "usuario";  // Coloque o nome de usuário correto
+            String senha = "senha";  // Coloque a senha correta
+            this.conn = DriverManager.getConnection(url, usuario, senha);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-    // Método para cadastrar produto no banco
+    // Exemplo de um método para cadastrar um produto (já existe no seu código)
     public boolean cadastrarProduto(ProdutosDTO produto) {
-        Connection con = null;
-        PreparedStatement pst = null;
-
-        try {
-            con = Conexao.getConnection(); // Conexão com o banco de dados
-            String sql = "INSERT INTO produtos (nome, valor, status) VALUES (?, ?, ?)";
-            pst = con.prepareStatement(sql);
-            pst.setString(1, produto.getNome());
-            pst.setInt(2, produto.getValor());
-            pst.setString(3, produto.getStatus());
-
-            int rowsAffected = pst.executeUpdate();
-            return rowsAffected > 0; // Retorna true se o produto foi inserido com sucesso
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        String sql = "INSERT INTO produtos (nome, valor, status) VALUES ('" 
+                    + produto.getNome() + "', " 
+                    + produto.getValor() + ", '" 
+                    + produto.getStatus() + "')";
+        
+        try (Statement stmt = conn.createStatement()) {
+            int resultado = stmt.executeUpdate(sql);
+            return resultado > 0;  // Retorna true se foi inserido com sucesso
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
-        } finally {
-            try {
-                if (pst != null) pst.close();
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
     }
 
-  
-    public ArrayList<ProdutosDTO> listarProdutos() {
-    ArrayList<ProdutosDTO> produtosList = new ArrayList<>();
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-
-    try {
-        con = Conexao.getConnection(); // Conexão com o banco de dados
-        String sql = "SELECT * FROM produtos"; // Consulta SQL
-        pst = con.prepareStatement(sql);
-        rs = pst.executeQuery(); // Executa a consulta
-
-        // Loop para preencher a lista com os dados do banco
-        while (rs.next()) {
-            ProdutosDTO produto = new ProdutosDTO();
-            produto.setId(rs.getInt("id"));
-            produto.setNome(rs.getString("nome"));
-            produto.setValor(rs.getInt("valor"));
-            produto.setStatus(rs.getString("status"));
-            produtosList.add(produto); // Adiciona o produto na lista
-        }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    } finally {
+    // Corrigir a exceção UnsupportedOperationException (caso ainda não tenha implementado)
+    public void listarProdutosVendidos() {
+        // Implementação do método ou, se não for implementado, apenas logue o erro
+        throw new UnsupportedOperationException("Método listarProdutosVendidos não implementado ainda.");
+    }
+    
+    // Fechar conexão quando não for mais necessário
+    public void fecharConexao() {
         try {
-            if (rs != null) rs.close();
-            if (pst != null) pst.close();
-            if (con != null) con.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    }
-    return produtosList; // Retorna a lista de produtos
     }
 }
